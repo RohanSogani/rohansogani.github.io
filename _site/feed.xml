@@ -6,39 +6,9 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 28 Jul 2020 21:15:08 -0700</pubDate>
-    <lastBuildDate>Tue, 28 Jul 2020 21:15:08 -0700</lastBuildDate>
+    <pubDate>Tue, 28 Jul 2020 21:22:53 -0700</pubDate>
+    <lastBuildDate>Tue, 28 Jul 2020 21:22:53 -0700</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
-    
-      <item>
-        <title>projects</title>
-        <description>&lt;p&gt;&lt;img width=&quot;800px&quot; height=&quot;400px&quot; src=&quot;/images/profile2.jpg&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 31 Jan 2016 15:23:23 -0800</pubDate>
-        <link>http://localhost:4000/jekyll/update/2016/01/31/hey.html</link>
-        <guid isPermaLink="true">http://localhost:4000/jekyll/update/2016/01/31/hey.html</guid>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>wordcloud</title>
-        <description>&lt;p&gt;&lt;img width=&quot;800px&quot; height=&quot;400px&quot; src=&quot;/images/cloud4.png&quot; /&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 31 Jan 2016 03:23:32 -0800</pubDate>
-        <link>http://localhost:4000/jekyll/update/2016/01/31/about-me.html</link>
-        <guid isPermaLink="true">http://localhost:4000/jekyll/update/2016/01/31/about-me.html</guid>
-        
-        
-        <category>jekyll</category>
-        
-        <category>update</category>
-        
-      </item>
     
   </channel>
 </rss>
