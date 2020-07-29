@@ -7,6 +7,8 @@
 			<div style="width: 30%; float:right">
 				{% if page.path == "misc.html" %}
 					<img class="circular" src="/images/misccloud.png">
+				{% elsif page.path == "workexp.html" %}
+					<img class="circular" src="/images/workExp.jpg">
 				{% elsif page.path == "projects.html" %}
 					<img class="circular" src="/images/projectscloud.png">
 				{% else %}
@@ -37,6 +39,17 @@
 				{% else %}
 					<li>
 						<a href="/aboutme.html">about me</a>
+					</li>			
+				{% endif %}
+				{% if page.path == "workexp.html" %}
+				<span class="title">
+					<li>
+						<a href="/workexp.html">work exp</a>
+					</li>
+				</span>			
+				{% else %}
+					<li>
+						<a href="/workexp.html">work exp</a>
 					</li>			
 				{% endif %}
 				{% if page.path == "projects.html" %}
