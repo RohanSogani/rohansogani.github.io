@@ -1,52 +1,67 @@
 <header class="header">
 	<div class="header-container">
-		<div class="nav">
-			{% if page.path == "index.html" %}
-			<span class="title">
-				<li>
-					<a href="/index.html">home</a>
-				</li>
-			</span>			
-			{% else %}
-				<li>
-					<a href="/index.html">home</a>
-				</li>			
-			{% endif %}
-			{% if page.path == "archive.html" %}
-			<span class="title">
-				<li>
-					<a href="/archive.html">archive</a>
-				</li>
-			</span>			
-			{% else %}
-				<li>
-					<a href="/archive.html">archive</a>
-				</li>			
-			{% endif %}
-			{% if page.path == "category.html" %}
-			<span class="title">
-				<li>
-					<a href="/category.html">category</a>
-				</li>
-			</span>			
-			{% else %}
-				<li>
-					<a href="/category.html">category</a>
-				</li>			
-			{% endif %}
-			{% if page.path == "about.html" %}
-			<span class="title">
-				<li>
-					<a href="/about.html">about</a>
-				</li>
-			</span>			
-			{% else %}
-				<li>
-					<a href="/about.html">about</a>
-				</li>			
-			{% endif %}
+		<div class="nav_img">
+			<div class="name_header" style="width: 70%; float:left">
+				<h2>Rohan Sogani</h2>
+			</div>
+			<div style="width: 30%; float:right">
+				{% if page.path == "misc.html" %}
+					<img class="circular" src="/images/misccloud.png">
+				{% elsif page.path == "projects.html" %}
+					<img class="circular" src="/images/projectscloud.png">
+				{% else %}
+					<img class="circular" src="/images/dp.jpg">
+				{% endif %}
+				
+			</div>
 		</div>
-		<div class="description"> {{ site.motto }} </div>		
+			<div class="description"> {{ site.motto }} </div>		
+			<div class="nav">
+				{% if page.path == "index.html" %}
+				<span class="title">
+					<li>
+						<a href="/index.html">home</a>
+					</li>
+				</span>			
+				{% else %}
+					<li>
+						<a href="/index.html">home</a>
+					</li>			
+				{% endif %}
+				{% if page.path == "aboutme.html" %}
+				<span class="title">
+					<li>
+						<a href="/aboutme.html">about me</a>
+					</li>
+				</span>			
+				{% else %}
+					<li>
+						<a href="/aboutme.html">about me</a>
+					</li>			
+				{% endif %}
+				{% if page.path == "projects.html" %}
+				<span class="title">
+					<li>
+						<a href="/projects.html">projects</a>
+					</li>
+				</span>			
+				{% else %}
+					<li>
+						<a href="/projects.html">projects</a>
+					</li>			
+				{% endif %}
+				{% if page.path == ".html" %}
+				<span class="title">
+					<li>
+						<a href="/misc.html">misc</a>
+					</li>
+				</span>			
+				{% else %}
+					<li>
+						<a href="/misc.html">misc</a>
+					</li>			
+				{% endif %}
+			</div>
 		<ul class="social-links">
 			<li>
 				<a href="https://github.com/{{ site.github_username }}" title="Github">
@@ -54,8 +69,13 @@
 				</a>
 			</li>
 			<li>
-				<a href="/feed.xml" title="RSS">
-					<img width="19px" height="19px" src="/images/rss.png"/>
+				<a href="https://www.linkedin.com/in/RohanSogani" title="Linkedin">
+					<img width="19px" height="19px" src="/images/linkedin.png"/>
+				</a>
+			</li>
+			<li>
+				<a href="mailto:{{ site.email }}" title="Email">
+					<img width="19px" height="19px" src="/images/email.png"/>
 				</a>
 			</li>
 			<li>
@@ -63,6 +83,12 @@
 					<img width="19px" height="19px" src="/images/twitter.png"/>
 				</a>
 			</li>
+			<li>
+				<a href="https://facebook.com/{{ site.twitter_username }}" title="Facebook">
+					<img width="19px" height="19px" src="/images/fb.png"/>
+				</a>
+			</li>
+			
 		</ul>		
 	</div>
 </header>
