@@ -1,0 +1,24 @@
+---
+// Umami page-view tracking plus a few custom events:
+//   resume-download  – any link to the resume PDF        { from }
+//   email-click      – mailto: links                       { from }
+//   outbound-link    – links to other sites (GitHub, LinkedIn, projects…) { url, from }
+import { analytics } from '../data/site';
+const { umamiWebsiteId, umamiSrc, domains } = analytics;
+---
+{umamiWebsiteId && (
+  <>
+    <script is:inline defer src={umamiSrc} data-website-id={umamiWebsiteId} data-domains={domains} data-do-not-track="true"></script>
+    <script is:inline>
+      document.addEventListener('click', (e) => {
+        const a = e.target instanceof Element && e.target.closest('a[href]');
+        if (!a || !window.umami) return;
+        const from = location.pathname;
+        const href = a.getAttribute('href');
+        if (href.endsWith('.pdf')) return umami.track('resume-download', { from });
+        if (href.startsWith('mailto:')) return umami.track('email-click', { from });
+        if (a.host && a.host !== location.host) umami.track('outbound-link', { url: a.href, from });
+      });
+    </script>
+  </>
+)}

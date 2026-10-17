@@ -48,6 +48,18 @@ Tags pages (`/blog/tags/<tag>/`) and the RSS feed (`/rss.xml`) update automatica
 
 Create `src/pages/<name>.astro` (copy `education.astro` as a starting point) and add one line to `nav` in `src/data/site.ts`.
 
+## Analytics
+
+[Umami](https://umami.is): cookieless, so there's no consent banner. Set `analytics.umamiWebsiteId` in
+`src/data/site.ts` (empty disables it). Only `rohansogani.github.io` is tracked, so local dev never sends data, and
+visitors with Do Not Track on are skipped. Custom events (see `src/components/Analytics.astro`):
+
+| Event | When | Data |
+| --- | --- | --- |
+| `resume-download` | any link to the resume PDF | `from` page |
+| `email-click` | mailto links | `from` page |
+| `outbound-link` | links to other sites (LinkedIn, GitHub, projects…) | `url`, `from` page |
+
 ## Privacy
 
 Never add a phone number. `npm run check:pii` runs in CI and blocks the deploy if one appears,

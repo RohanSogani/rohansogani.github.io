@@ -20,6 +20,14 @@ export const site = {
   palette: 'sage',
 };
 
+// Umami analytics (https://umami.is). Cookieless, so no consent banner is needed.
+// Leave websiteId empty to disable tracking. Only the domains listed are tracked (not localhost).
+export const analytics = {
+  umamiWebsiteId: 'cad0a242-eb7d-4f9d-a496-f0689dbe24b7',
+  umamiSrc: 'https://cloud.umami.is/script.js',
+  domains: 'rohansogani.github.io',
+};
+
 export const socials = [
   { label: 'GitHub', href: 'https://github.com/RohanSogani', icon: 'github' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/rohansogani/', icon: 'linkedin' },
