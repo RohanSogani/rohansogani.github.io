@@ -1,0 +1,14 @@
+---
+// The official wolf mark. Source of truth: public/logo.svg (also used for favicons).
+interface Props { size?: number; class?: string }
+const { size = 30, class: cls = 'logo-svg' } = Astro.props;
+---
+<svg class={cls} width={size} height={size} viewBox="0 0 64 64" aria-hidden="true">
+  <rect width="64" height="64" rx="14" fill="#172219"/>
+  <path d="M13 9 L26 21 L38 21 L51 9 L53 33 L43 46 L32 57 L21 46 L11 33 Z" fill="#e8efe9"/>
+  <path d="M13 9 L26 21 L18 28 Z M51 9 L38 21 L46 28 Z" fill="#8cc49f"/>
+  <path d="M11 33 L21 46 L26 36 Z M53 33 L43 46 L38 36 Z" fill="#c9d8cc"/>
+  <path d="M26 38 L38 38 L32 54 Z" fill="#2f6b45"/>
+  <path d="M29 51 L35 51 L32 57 Z" fill="#172219"/>
+  <path d="M20 30 L27 32 L21 33.5 Z M44 30 L37 32 L43 33.5 Z" fill="#172219"/>
+</svg>

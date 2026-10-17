@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import JumpNav from '../components/JumpNav.astro';
+import { projectGroups } from '../data/projects';
+---
+<Base title="Projects" description="Open-source, research and side projects by Rohan Sogani: model gateways, BFT consensus, ML and more.">
+  <div class="container">
+    <header class="page-head">
+      <div class="eyebrow">Projects</div>
+      <h1>Things I’ve built</h1>
+      <p>From Rust model gateways and agentic QA to sharded blockchain consensus and early-college hacks.</p>
+      <JumpNav items={projectGroups.map((g) => ({ id: g.id, label: g.short, count: g.projects.length }))} />
+    </header>
+    {projectGroups.map((g, i) => (
+      <section id={g.id} class={i ? 'section' : ''}>
+        <h2>{g.group}</h2>
+        <div class="grid">
+          {g.projects.map((p) => (
+            <article class="card project">
+              <h3>
+                {p.link ? <a href={p.link} rel="noopener">{p.name} <Icon name="external" size={14} /></a> : p.name}
+                {p.featured && <span class="badge">Featured</span>}
+              </h3>
+              <div class="meta">{p.period}{p.collaborators && <> · {p.collaborators}</>}</div>
+              <p>{p.summary}</p>
+              <ul class="chips">{p.tech.map((t) => <li class="chip">{t}</li>)}</ul>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</Base>

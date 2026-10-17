@@ -1,0 +1,22 @@
+---
+import Icon from './Icon.astro';
+import Logo from './Logo.astro';
+import { site, socials } from '../data/site';
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-brand">
+      <Logo size={36} />
+      <div>
+        <div>© {new Date().getFullYear()} {site.name}. All rights reserved.</div>
+        <div class="tm-note">The wolf logo and “{site.name}” wordmark are trademarks™ of {site.name}.</div>
+        <div><em>{site.motto}</em></div>
+      </div>
+    </div>
+    <ul class="socials">
+      {socials.map((s) => (
+        <li><a href={s.href} aria-label={s.label} title={s.label} rel={s.href.startsWith('http') ? 'me noopener' : undefined}><Icon name={s.icon} /></a></li>
+      ))}
+    </ul>
+  </div>
+</footer>

@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import { education } from '../data/profile';
+---
+<Base title="Education" description="MS Computer Science, UC Davis · BE Information Technology, Pune Institute of Computer Technology.">
+  <div class="narrow">
+    <header class="page-head">
+      <div class="eyebrow">Education</div>
+      <h1>Where I learned</h1>
+    </header>
+    {education.map((e) => (
+      <article class="org card" style="margin-bottom:20px">
+        <div class="org-logo"><img src={e.logo} alt={`${e.school} logo`} loading="lazy" /></div>
+        <div>
+          <div class="org-head">
+            <h3><a href={e.url} rel="noopener">{e.school}</a></h3>
+            <div><strong>{e.degree}</strong></div>
+            <div class="muted" style="font-size:.9rem">{e.period} · GPA {e.gpa}</div>
+          </div>
+          <p class="muted" style="margin:12px 0 8px;font-size:.9rem">Relevant coursework</p>
+          <ul class="chips">{e.courses.map((c) => <li class="chip">{c}</li>)}</ul>
+        </div>
+      </article>
+    ))}
+  </div>
+</Base>

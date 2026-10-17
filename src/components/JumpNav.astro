@@ -1,0 +1,13 @@
+---
+// "On this page" links. Each item's id must match an element id on the page.
+// Extra buttons (e.g. Resume) can be passed in the default slot.
+interface Item { id: string; label: string; count?: number }
+interface Props { items: Item[] }
+const { items } = Astro.props;
+---
+<nav class="jump-nav" aria-label="On this page">
+  {items.map((i) => (
+    <a class="btn" href={`#${i.id}`}>{i.label}{i.count !== undefined && <span class="count">{i.count}</span>}</a>
+  ))}
+  <slot />
+</nav>

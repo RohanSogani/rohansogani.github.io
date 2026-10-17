@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 100" role="img" aria-label="SAP">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#00B8F1"/>
+      <stop offset="1" stop-color="#1E5FBB"/>
+    </linearGradient>
+  </defs>
+  <polygon points="0,0 280,0 180,100 0,100" fill="url(#g)"/>
+  <text x="14" y="82" fill="#fff" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="800" font-size="86" letter-spacing="-3">SAP</text>
+</svg>

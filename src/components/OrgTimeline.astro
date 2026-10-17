@@ -1,0 +1,28 @@
+---
+import type { Org } from '../data/experience';
+import { md } from '../lib/md';
+interface Props { orgs: Org[] }
+const { orgs } = Astro.props;
+const initials = (s: string) => s.split(/\s+/).filter((w) => /^[A-Z]/.test(w)).slice(0, 2).map((w) => w[0]).join('');
+---
+{orgs.map((o) => (
+  <article class="org">
+    {o.logo
+      ? <div class="org-logo"><img src={o.logo} alt={`${o.org} logo`} loading="lazy" /></div>
+      : <div class="org-logo initials" aria-hidden="true">{initials(o.org)}</div>}
+    <div>
+      <div class="org-head">
+        <h3>{o.url ? <a href={o.url} rel="noopener">{o.org}</a> : o.org}</h3>
+        <div class="muted">{o.location}</div>
+      </div>
+      {o.roles.map((r) => (
+        <div class="role">
+          <h4>{r.title}</h4>
+          <div class="dates">{r.start} – {r.end}</div>
+          {r.bullets && <ul>{r.bullets.map((b) => <li set:html={md(b)} />)}</ul>}
+          {r.tech && <ul class="chips">{r.tech.map((t) => <li class="chip">{t}</li>)}</ul>}
+        </div>
+      ))}
+    </div>
+  </article>
+))}

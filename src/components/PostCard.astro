@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate, readingTime, tagSlug } from '../lib/posts';
+interface Props { post: CollectionEntry<'blog'> }
+const { post } = Astro.props;
+const { title, description, date, tags, draft } = post.data;
+---
+<li
+  class="card"
+  data-post
+  data-title={title.toLowerCase()}
+  data-text={`${title} ${description} ${tags.join(' ')}`.toLowerCase()}
+  data-year={date.getUTCFullYear()}
+  data-date={date.toISOString()}
+  data-tags={tags.join('|')}
+>
+  <a class="post-card" href={`/blog/${post.id}/`}>
+    <time datetime={date.toISOString()}>{formatDate(date)}</time>
+    <span class="muted" style="font-size:.85rem"> · {readingTime(post.body)}{draft && ' · DRAFT'}</span>
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </a>
+  {tags.length > 0 && <ul class="chips">{tags.map((t) => <li><a class="chip" href={`/blog/tags/${tagSlug(t)}/`}>#{t}</a></li>)}</ul>}
+</li>

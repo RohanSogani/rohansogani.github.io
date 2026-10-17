@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import PostCard from '../components/PostCard.astro';
+import { site, socials } from '../data/site';
+import { interests, skills } from '../data/profile';
+import { projectGroups } from '../data/projects';
+import { getPosts } from '../lib/posts';
+
+const featured = projectGroups.flatMap((g) => g.projects).filter((p) => p.featured);
+const posts = (await getPosts()).slice(0, 3);
+---
+<Base>
+  <div class="container">
+    <section class="hero">
+      <div>
+        <h1>{site.name}</h1>
+        <p class="role-line">{site.headline}</p>
+        <p class="lead">{site.intro}</p>
+        <div class="actions">
+          <a class="btn primary" href={site.resume}><Icon name="download" size={16} /> Resume</a>
+          {socials.filter((s) => s.icon !== 'rss').map((s) => (
+            <a class="btn" href={s.href} rel={s.href.startsWith('http') ? 'me noopener' : undefined}><Icon name={s.icon} size={16} /> {s.label}</a>
+          ))}
+        </div>
+      </div>
+      <img class="avatar" src={site.avatar} alt="Portrait of Rohan Sogani" width="220" height="220" />
+    </section>
+
+    <section class="section">
+      <div class="section-title"><h2>Interests</h2></div>
+      <div class="grid">
+        {interests.map((i) => (
+          <div class="card interest"><h3>{i.title}</h3><p>{i.text}</p></div>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title"><h2>Selected projects</h2><a href="/projects/">All projects <Icon name="arrow" size={14} /></a></div>
+      <div class="grid">
+        {featured.map((p) => (
+          <article class="card project">
+            <h3>{p.link ? <a href={p.link} rel="noopener">{p.name} <Icon name="external" size={14} /></a> : p.name}</h3>
+            <div class="meta">{p.period}</div>
+            <p>{p.summary}</p>
+            <ul class="chips">{p.tech.map((t) => <li class="chip">{t}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    {posts.length > 0 && (
+      <section class="section">
+        <div class="section-title"><h2>Writing</h2><a href="/blog/">All posts <Icon name="arrow" size={14} /></a></div>
+        <ul class="post-list">{posts.map((post) => <PostCard post={post} />)}</ul>
+      </section>
+    )}
+
+    <section class="section">
+      <div class="section-title"><h2>Skills</h2><a href="/experience/">Experience <Icon name="arrow" size={14} /></a></div>
+      <div class="skill-rows">
+        {skills.map((s) => (
+          <div class="skill-row"><h3>{s.group}</h3><ul class="chips">{s.items.map((i) => <li class="chip">{i}</li>)}</ul></div>
+        ))}
+      </div>
+    </section>
+  </div>
+</Base>

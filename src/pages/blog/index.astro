@@ -1,0 +1,102 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPosts } from '../../lib/posts';
+const posts = await getPosts();
+const tags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
+const years = [...new Set(posts.map((p) => p.data.date.getUTCFullYear()))].sort((a, b) => b - a);
+---
+<Base title="Blog" description="Notes on distributed systems, cloud infrastructure and generative AI.">
+  <div class="narrow">
+    <header class="page-head">
+      <div class="eyebrow">Blog</div>
+      <h1>Writing</h1>
+      <p>Notes on distributed systems, cloud infrastructure, generative AI and things I learn along the way. <a href="/rss.xml">Subscribe via RSS</a>.</p>
+    </header>
+
+    {posts.length ? (
+      <>
+        <form class="blog-filters" id="blog-filters" role="search" onsubmit="return false">
+          <label class="search">
+            <span class="sr-only">Search posts</span>
+            <input type="search" name="q" placeholder="Search by title or topic…" autocomplete="off" />
+          </label>
+          <label>
+            <span class="sr-only">Year</span>
+            <select name="year">
+              <option value="">All years</option>
+              {years.map((y) => <option value={y}>{y}</option>)}
+            </select>
+          </label>
+          <label>
+            <span class="sr-only">Tag</span>
+            <select name="tag">
+              <option value="">All tags</option>
+              {tags.map((t) => <option value={t}>{t}</option>)}
+            </select>
+          </label>
+          <label>
+            <span class="sr-only">Sort</span>
+            <select name="sort">
+              <option value="new">Newest first</option>
+              <option value="old">Oldest first</option>
+            </select>
+          </label>
+        </form>
+        <p class="results-meta" id="results-meta" aria-live="polite">{posts.length} {posts.length === 1 ? 'post' : 'posts'}</p>
+        <ul class="post-list" id="post-list">{posts.map((post) => <PostCard post={post} />)}</ul>
+        <p class="muted empty" id="empty" hidden>No posts match those filters. <button type="button" class="link-btn" id="clear">Clear filters</button></p>
+      </>
+    ) : (
+      <p class="muted">No posts yet. Check back soon!</p>
+    )}
+  </div>
+</Base>
+
+<script>
+  const form = document.getElementById('blog-filters') as HTMLFormElement | null;
+  const list = document.getElementById('post-list');
+  if (form && list) {
+    const items = [...list.querySelectorAll<HTMLLIElement>('[data-post]')];
+    const meta = document.getElementById('results-meta')!;
+    const empty = document.getElementById('empty')!;
+    const field = (n: string) => form.elements.namedItem(n) as HTMLInputElement | HTMLSelectElement;
+
+    // Restore filters from the URL so filtered views can be shared (/blog/?tag=kubernetes&year=2026)
+    const params = new URLSearchParams(location.search);
+    for (const n of ['q', 'year', 'tag', 'sort']) if (params.has(n)) field(n).value = params.get(n)!;
+
+    const apply = () => {
+      const q = field('q').value.trim().toLowerCase();
+      const year = field('year').value;
+      const tag = field('tag').value;
+      const sort = field('sort').value;
+      const terms = q.split(/\s+/).filter(Boolean);
+      let shown = 0;
+      for (const li of items) {
+        const ok =
+          terms.every((t) => li.dataset.text!.includes(t)) &&
+          (!year || li.dataset.year === year) &&
+          (!tag || li.dataset.tags!.split('|').includes(tag));
+        li.hidden = !ok;
+        if (ok) shown++;
+      }
+      items
+        .sort((a, b) => (sort === 'old' ? 1 : -1) * a.dataset.date!.localeCompare(b.dataset.date!))
+        .forEach((li) => list.appendChild(li));
+      meta.textContent = `${shown} of ${items.length} ${items.length === 1 ? 'post' : 'posts'}`;
+      empty.hidden = shown > 0;
+
+      const next = new URLSearchParams();
+      if (q) next.set('q', q);
+      if (year) next.set('year', year);
+      if (tag) next.set('tag', tag);
+      if (sort !== 'new') next.set('sort', sort);
+      history.replaceState(null, '', next.size ? `?${next}` : location.pathname);
+    };
+
+    form.addEventListener('input', apply);
+    document.getElementById('clear')?.addEventListener('click', () => { form.reset(); apply(); });
+    apply();
+  }
+</script>

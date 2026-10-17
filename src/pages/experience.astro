@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import OrgTimeline from '../components/OrgTimeline.astro';
+import JumpNav from '../components/JumpNav.astro';
+import { work, research, teaching } from '../data/experience';
+import { site } from '../data/site';
+---
+<Base title="Experience" description="Work, research and teaching experience: Oracle, Amazon, SAP Labs and UC Davis.">
+  <div class="container">
+    <header class="page-head">
+      <div class="eyebrow">Experience</div>
+      <h1>Where I’ve worked</h1>
+      <p>
+        Around 10 years building cloud and enterprise software at Oracle, Amazon and SAP, plus distributed-systems
+        research and teaching at UC Davis.
+      </p>
+      <JumpNav items={[
+        { id: 'industry', label: 'Industry', count: work.length },
+        { id: 'research', label: 'Research', count: research.length },
+        { id: 'teaching', label: 'Teaching', count: teaching.length },
+      ]}>
+        <a class="btn primary" href={site.resume}><Icon name="download" size={16} /> Resume</a>
+      </JumpNav>
+    </header>
+
+    <section id="industry"><h2>Industry experience</h2><OrgTimeline orgs={work} /></section>
+    <section class="section" id="research">
+      <h2>Research experience</h2>
+      <p class="muted">Research taught me new concepts, and also the discipline and focus I think success depends on.</p>
+      <OrgTimeline orgs={research} />
+    </section>
+    <section class="section" id="teaching">
+      <h2>Teaching experience</h2>
+      <p class="muted">I loved teaching programming to young minds and helping students shape their future.</p>
+      <OrgTimeline orgs={teaching} />
+    </section>
+  </div>
+</Base>

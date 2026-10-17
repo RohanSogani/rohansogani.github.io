@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import JumpNav from '../components/JumpNav.astro';
+import { awards, gallery } from '../data/profile';
+const sections = [
+  { title: 'Professional', items: awards.professional },
+  { title: 'College', items: awards.college },
+  { title: 'School', items: awards.school },
+  { title: 'Extracurricular', items: awards.extracurricular },
+];
+---
+<Base title="Beyond Work" description="Awards, extracurriculars and travel photography by Rohan Sogani.">
+  <div class="container">
+    <header class="page-head">
+      <div class="eyebrow">Beyond work</div>
+      <h1>Awards, activities & photography</h1>
+      <JumpNav items={[
+        { id: 'awards', label: 'Awards & activities' },
+        { id: 'photography', label: 'Photography', count: gallery.length },
+      ]} />
+    </header>
+
+    <h2 id="awards">Awards & activities</h2>
+    <div class="skill-rows">
+      {sections.map((s) => (
+        <div class="skill-row">
+          <h3>{s.title}</h3>
+          <ul class="award-list">{s.items.map((i) => <li>{i}</li>)}</ul>
+        </div>
+      ))}
+    </div>
+
+    <section class="section" id="photography">
+      <h2>Photography</h2>
+      <p class="muted">I’ve been lucky to travel to some amazing places and photograph them, mostly lakes, clouds and a few mountains.</p>
+      <div class="gallery">
+        {gallery.map((g) => (
+          <a href={g.src} target="_blank" rel="noopener">
+            <figure><div class="frame"><img src={g.src} alt={g.caption} loading="lazy" width="400" height="300" /></div><figcaption>{g.caption}</figcaption></figure>
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+</Base>

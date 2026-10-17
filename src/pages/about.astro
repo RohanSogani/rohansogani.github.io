@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import JumpNav from '../components/JumpNav.astro';
+import { site } from '../data/site';
+---
+<Base title="About" description="About Rohan Sogani: engineer, distributed-systems enthusiast, reader, traveller and skydiver.">
+  <div class="narrow prose">
+    <header class="page-head">
+      <div class="eyebrow">About</div>
+      <h1>A little about me</h1>
+      <JumpNav items={[
+        { id: 'now', label: 'Now' },
+        { id: 'interests', label: 'Interests' },
+        { id: 'next', label: 'What’s next' },
+        { id: 'personal', label: 'Personal' },
+        { id: 'contact', label: 'Get in touch' },
+      ]} />
+    </header>
+
+    <h2 id="now">Now</h2>
+    <p>
+      I’m a <strong>Senior Member of Technical Staff at Oracle Cloud Infrastructure</strong> in Seattle, where I work on
+      the <strong>OCI Generative AI Agent Service</strong>. I build its Kubernetes-based control and data planes, the sandboxed
+      code-execution environment, the agent-tool gateway and the model gateway. I also lead a team of engineers on model
+      selection and routing.
+    </p>
+    <p>
+      Before Oracle, I interned at <strong>Amazon</strong>, completed my <strong>MS in Computer Science at the{' '}
+      <a href="https://cs.ucdavis.edu/">University of California, Davis</a></strong>, and spent <strong>3 years as a software developer at SAP Labs</strong>{' '}
+      in Bangalore. I did my undergrad at <a href="https://pict.edu/">Pune Institute of Computer Technology</a>{' '}
+      (affiliated with Savitribai Phule Pune University).
+    </p>
+
+    <h2 id="interests">Interests</h2>
+    <p>
+      My interests are in <strong>distributed systems</strong>, especially consensus protocols and scaling systems, and lately
+      the infrastructure that makes <strong>LLM agents</strong> safe, fast and multi-tenant. I love automating small things to
+      speed up my work and keep it consistent, and I build small apps to stay close to new technologies.
+    </p>
+    <ul class="award-list">
+      <li>A strong believer in DevOps, SRE and writing robust, easy-to-maintain software.</li>
+      <li>I value constructive criticism and love acting on feedback.</li>
+    </ul>
+
+    <h2 id="next">What’s next?</h2>
+    <p>
+      My long-term aim is to start a company that makes a direct impact on people’s lives. Until then, I want to keep
+      learning and mastering the craft of building great software.
+    </p>
+
+    <h2 id="personal">On a personal note</h2>
+    <p>
+      Outside of CS, I enjoy cooking and love making all kinds of sandwiches. I love being in and around nature,
+      especially lakes, and I travel whenever I can (see some <a href="/misc/">photos</a>). I didn't read much as a
+      teenager, but 2016 turned me into an avid reader, and I recommend <em>Sapiens</em> to everyone. I'm adventurous too:
+      <strong>skydiving</strong> is one of the biggest thrills I've had. <strong>3, 2, 1… JUMP!</strong>
+    </p>
+    <iframe class="video" src="https://drive.google.com/file/d/1-VAid-YcF-aPKFtyLEY3onIFe67vgNNs/preview" title="Skydiving video" loading="lazy" allow="autoplay"></iframe>
+
+    <h2 id="contact">Get in touch</h2>
+    <p>
+      The best way to reach me is <a href={`mailto:${site.email}`}>{site.email}</a> or{' '}
+      <a href="https://www.linkedin.com/in/rohansogani/">LinkedIn</a>. You can also grab my{' '}
+      <a href={site.resume}>resume (PDF)</a> or browse my <a href="https://github.com/RohanSogani">GitHub</a>.
+    </p>
+  </div>
+</Base>
