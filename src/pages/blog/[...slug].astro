@@ -17,7 +17,7 @@ const { title, description, date, updated, tags } = post.data;
 <Base title={title} description={description} type="article">
   <article class="narrow">
     <header class="page-head">
-      <a href="/blog/" style="font-weight:600;text-decoration:none">← All posts</a>
+      <a class="back-link" href="/blog/" style="font-weight:600">← All posts</a>
       <h1 style="margin-top:.6em">{title}</h1>
       <p class="muted" style="font-size:.95rem">
         <time datetime={date.toISOString()}>{formatDate(date)}</time>

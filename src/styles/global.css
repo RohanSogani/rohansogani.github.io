@@ -174,7 +174,13 @@ a.chip:hover { background: var(--brand-soft); color: var(--brand); text-decorati
 .role ul { padding-left: 1.1em; margin: 10px 0 12px; }
 .role li { margin-bottom: 6px; color: var(--muted); }
 .role li strong { color: var(--text); }
-@media (max-width: 600px) { .org { grid-template-columns: 1fr; gap: 12px; } .org-logo { width: 40px; height: 40px; } }
+@media (max-width: 600px) {
+  /* Phone: logo sits beside the org name; roles and details use the full width below. */
+  .org { grid-template-columns: 40px 1fr; column-gap: 12px; row-gap: 0; align-items: start; }
+  .org-logo { width: 40px; height: 40px; }
+  .org > div:last-child { display: contents; }
+  .org > div:last-child > :not(.org-head) { grid-column: 1 / -1; }
+}
 
 /* ---------- Projects ---------- */
 .project { display: flex; flex-direction: column; gap: 8px; transition: border-color .15s ease; }
@@ -185,7 +191,7 @@ a.chip:hover { background: var(--brand-soft); color: var(--brand); text-decorati
 .project .meta { font-size: 0.84rem; color: var(--subtle); }
 .project p { margin: 0; font-size: 0.95rem; color: var(--muted); }
 .project .chips { margin-top: auto; padding-top: 8px; }
-.badge { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--brand); background: var(--brand-soft); padding: 1px 7px; border-radius: 4px; }
+.badge { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--brand); background: var(--brand-soft); padding: 1px 7px; border-radius: 4px; }
 
 /* ---------- Blog ---------- */
 .post-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
@@ -258,3 +264,8 @@ a.chip:hover { background: var(--brand-soft); color: var(--brand); text-decorati
 .footer-brand { display: flex; gap: 14px; align-items: flex-start; }
 .footer-brand .logo-svg { border-radius: 9px; }
 .tm-note { font-size: 0.8rem; }
+
+/* Bigger touch areas for small inline links (vertical padding on inline links grows the tap area, not the layout) */
+a.chip { padding-block: 5px; }
+.section-title a, .project h3 a, .org-head h3 a, .post-card, .back-link, .education-school a { padding-block: 6px; }
+.logo { min-height: 44px; }
